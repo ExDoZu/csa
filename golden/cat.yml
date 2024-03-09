@@ -1,0 +1,69 @@
+in_source: |-
+  .data
+  input:
+    0
+  output:
+    0
+  .text
+  start:
+  load input
+  store output
+  jmp start
+  halt
+in_stdin: |-
+  raz
+  dva
+out_code: |-
+  [".data",
+   0,
+   0,
+   ".text",
+   {"index": 0, "opcode": "load", "arg": 0, "term": [8, "load input"]},
+   {"index": 1, "opcode": "store", "arg": 1, "term": [9, "store output"]},
+   {"index": 2, "opcode": "jmp", "arg": 0, "term": [10, "jmp start"]},
+   {"index": 3, "opcode": "halt", "term": [11, "halt"]}]
+out_stdout: |
+  source LoC: 11 code instr: 8
+  ============================================================
+  raz
+  dva
+  instr_counter:  21 ticks: 36
+out_log: |
+  DEBUG   machine:simulation    TICK: 0 PC: 0 ADDR: 0 MEM_OUT: 0 ACC: 0 	load 0  ('load input'@8)
+  DEBUG   machine:signal_latch_acc input: 'r' 
+  DEBUG   machine:simulation    TICK: 2 PC: 1 ADDR: 0 MEM_OUT: 0 ACC: 114 	store 1  ('store output'@9)
+  DEBUG   machine:signal_wr     output: 'r' << 'r'
+  DEBUG   machine:simulation    TICK: 4 PC: 2 ADDR: 1 MEM_OUT: 0 ACC: 114 	jmp 0  ('jmp start'@10)
+  DEBUG   machine:simulation    TICK: 5 PC: 0 ADDR: 1 MEM_OUT: 0 ACC: 114 	load 0  ('load input'@8)
+  DEBUG   machine:signal_latch_acc input: 'a' 
+  DEBUG   machine:simulation    TICK: 7 PC: 1 ADDR: 0 MEM_OUT: 0 ACC: 97 	store 1  ('store output'@9)
+  DEBUG   machine:signal_wr     output: 'ra' << 'a'
+  DEBUG   machine:simulation    TICK: 9 PC: 2 ADDR: 1 MEM_OUT: 0 ACC: 97 	jmp 0  ('jmp start'@10)
+  DEBUG   machine:simulation    TICK: 10 PC: 0 ADDR: 1 MEM_OUT: 0 ACC: 97 	load 0  ('load input'@8)
+  DEBUG   machine:signal_latch_acc input: 'z' 
+  DEBUG   machine:simulation    TICK: 12 PC: 1 ADDR: 0 MEM_OUT: 0 ACC: 122 	store 1  ('store output'@9)
+  DEBUG   machine:signal_wr     output: 'raz' << 'z'
+  DEBUG   machine:simulation    TICK: 14 PC: 2 ADDR: 1 MEM_OUT: 0 ACC: 122 	jmp 0  ('jmp start'@10)
+  DEBUG   machine:simulation    TICK: 15 PC: 0 ADDR: 1 MEM_OUT: 0 ACC: 122 	load 0  ('load input'@8)
+  DEBUG   machine:signal_latch_acc input: '\n' 
+  DEBUG   machine:simulation    TICK: 17 PC: 1 ADDR: 0 MEM_OUT: 0 ACC: 10 	store 1  ('store output'@9)
+  DEBUG   machine:signal_wr     output: 'raz\n' << '\n'
+  DEBUG   machine:simulation    TICK: 19 PC: 2 ADDR: 1 MEM_OUT: 0 ACC: 10 	jmp 0  ('jmp start'@10)
+  DEBUG   machine:simulation    TICK: 20 PC: 0 ADDR: 1 MEM_OUT: 0 ACC: 10 	load 0  ('load input'@8)
+  DEBUG   machine:signal_latch_acc input: 'd' 
+  DEBUG   machine:simulation    TICK: 22 PC: 1 ADDR: 0 MEM_OUT: 0 ACC: 100 	store 1  ('store output'@9)
+  DEBUG   machine:signal_wr     output: 'raz\nd' << 'd'
+  DEBUG   machine:simulation    TICK: 24 PC: 2 ADDR: 1 MEM_OUT: 0 ACC: 100 	jmp 0  ('jmp start'@10)
+  DEBUG   machine:simulation    TICK: 25 PC: 0 ADDR: 1 MEM_OUT: 0 ACC: 100 	load 0  ('load input'@8)
+  DEBUG   machine:signal_latch_acc input: 'v' 
+  DEBUG   machine:simulation    TICK: 27 PC: 1 ADDR: 0 MEM_OUT: 0 ACC: 118 	store 1  ('store output'@9)
+  DEBUG   machine:signal_wr     output: 'raz\ndv' << 'v'
+  DEBUG   machine:simulation    TICK: 29 PC: 2 ADDR: 1 MEM_OUT: 0 ACC: 118 	jmp 0  ('jmp start'@10)
+  DEBUG   machine:simulation    TICK: 30 PC: 0 ADDR: 1 MEM_OUT: 0 ACC: 118 	load 0  ('load input'@8)
+  DEBUG   machine:signal_latch_acc input: 'a' 
+  DEBUG   machine:simulation    TICK: 32 PC: 1 ADDR: 0 MEM_OUT: 0 ACC: 97 	store 1  ('store output'@9)
+  DEBUG   machine:signal_wr     output: 'raz\ndva' << 'a'
+  DEBUG   machine:simulation    TICK: 34 PC: 2 ADDR: 1 MEM_OUT: 0 ACC: 97 	jmp 0  ('jmp start'@10)
+  DEBUG   machine:simulation    TICK: 35 PC: 0 ADDR: 1 MEM_OUT: 0 ACC: 97 	load 0  ('load input'@8)
+  WARNING machine:simulation    Input buffer is empty!
+  INFO    machine:simulation    output_buffer: 'raz\ndva'

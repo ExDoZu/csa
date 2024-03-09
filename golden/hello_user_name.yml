@@ -1,0 +1,641 @@
+in_source: |-
+  .data
+  input:
+      0
+  output:
+      0
+  text1:
+      "What is your name?"
+  text2:
+      "Hello, "
+  text3:
+      "!"
+  new_line_code:
+      10
+
+  counter:
+      0
+  last_addr:
+      0
+
+  buffer:
+      0
+
+  .text
+  load text1
+  store counter
+  mov text1 
+  store last_addr
+  loop:
+      load last_addr
+      inc
+      store last_addr
+      
+      ld last_addr
+      store output
+      
+      load counter
+      dec
+      store counter
+      jnz loop
+
+  load new_line_code
+  store output
+
+  mov buffer 
+  inc
+  store last_addr
+
+  input_loop:
+      load input
+      sub new_line_code
+      jz input_break
+      add new_line_code
+      st last_addr
+      
+      load last_addr
+      inc
+      store last_addr
+
+      load buffer
+      inc 
+      store buffer
+
+      jmp input_loop
+  input_break:
+
+  load text2
+  store counter
+  mov text2 
+  store last_addr
+  loop2:
+      load last_addr
+      inc
+      store last_addr
+      
+      ld last_addr
+      store output
+      
+      load counter
+      dec
+      store counter
+      jnz loop2
+
+  load buffer
+  store counter
+  mov buffer 
+  store last_addr
+  loop3:
+      load last_addr
+      inc
+      store last_addr
+      
+      ld last_addr
+      store output
+      
+      load counter
+      dec
+      store counter
+      jnz loop3
+
+
+  load text3
+  store counter
+  mov text3 
+  store last_addr
+  loop4:
+      load last_addr
+      inc
+      store last_addr
+      
+      ld last_addr
+      store output
+      
+      load counter
+      dec
+      store counter
+      jnz loop4
+
+  halt
+
+in_stdin: |-
+  Alice
+   
+out_log: |
+  DEBUG   machine:simulation    TICK: 0 PC: 0 ADDR: 0 MEM_OUT: 0 ACC: 0 	load 2  ('load text1'@24)
+  DEBUG   machine:simulation    TICK: 2 PC: 1 ADDR: 2 MEM_OUT: 18 ACC: 18 	store 32  ('store counter'@25)
+  DEBUG   machine:simulation    TICK: 4 PC: 2 ADDR: 32 MEM_OUT: 18 ACC: 18 	mov 2  ('mov text1'@26)
+  DEBUG   machine:simulation    TICK: 5 PC: 3 ADDR: 32 MEM_OUT: 18 ACC: 2 	store 33  ('store last_addr'@27)
+  DEBUG   machine:simulation    TICK: 7 PC: 4 ADDR: 33 MEM_OUT: 2 ACC: 2 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 9 PC: 5 ADDR: 33 MEM_OUT: 2 ACC: 2 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 10 PC: 6 ADDR: 33 MEM_OUT: 2 ACC: 3 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 12 PC: 7 ADDR: 33 MEM_OUT: 3 ACC: 3 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 15 PC: 8 ADDR: 3 MEM_OUT: 87 ACC: 87 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'W' << 'W'
+  DEBUG   machine:simulation    TICK: 17 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 87 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 19 PC: 10 ADDR: 32 MEM_OUT: 18 ACC: 18 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 20 PC: 11 ADDR: 32 MEM_OUT: 18 ACC: 17 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 22 PC: 12 ADDR: 32 MEM_OUT: 17 ACC: 17 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 23 PC: 4 ADDR: 32 MEM_OUT: 17 ACC: 17 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 25 PC: 5 ADDR: 33 MEM_OUT: 3 ACC: 3 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 26 PC: 6 ADDR: 33 MEM_OUT: 3 ACC: 4 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 28 PC: 7 ADDR: 33 MEM_OUT: 4 ACC: 4 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 31 PC: 8 ADDR: 4 MEM_OUT: 104 ACC: 104 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'Wh' << 'h'
+  DEBUG   machine:simulation    TICK: 33 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 104 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 35 PC: 10 ADDR: 32 MEM_OUT: 17 ACC: 17 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 36 PC: 11 ADDR: 32 MEM_OUT: 17 ACC: 16 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 38 PC: 12 ADDR: 32 MEM_OUT: 16 ACC: 16 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 39 PC: 4 ADDR: 32 MEM_OUT: 16 ACC: 16 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 41 PC: 5 ADDR: 33 MEM_OUT: 4 ACC: 4 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 42 PC: 6 ADDR: 33 MEM_OUT: 4 ACC: 5 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 44 PC: 7 ADDR: 33 MEM_OUT: 5 ACC: 5 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 47 PC: 8 ADDR: 5 MEM_OUT: 97 ACC: 97 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'Wha' << 'a'
+  DEBUG   machine:simulation    TICK: 49 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 97 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 51 PC: 10 ADDR: 32 MEM_OUT: 16 ACC: 16 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 52 PC: 11 ADDR: 32 MEM_OUT: 16 ACC: 15 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 54 PC: 12 ADDR: 32 MEM_OUT: 15 ACC: 15 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 55 PC: 4 ADDR: 32 MEM_OUT: 15 ACC: 15 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 57 PC: 5 ADDR: 33 MEM_OUT: 5 ACC: 5 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 58 PC: 6 ADDR: 33 MEM_OUT: 5 ACC: 6 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 60 PC: 7 ADDR: 33 MEM_OUT: 6 ACC: 6 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 63 PC: 8 ADDR: 6 MEM_OUT: 116 ACC: 116 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'What' << 't'
+  DEBUG   machine:simulation    TICK: 65 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 116 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 67 PC: 10 ADDR: 32 MEM_OUT: 15 ACC: 15 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 68 PC: 11 ADDR: 32 MEM_OUT: 15 ACC: 14 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 70 PC: 12 ADDR: 32 MEM_OUT: 14 ACC: 14 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 71 PC: 4 ADDR: 32 MEM_OUT: 14 ACC: 14 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 73 PC: 5 ADDR: 33 MEM_OUT: 6 ACC: 6 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 74 PC: 6 ADDR: 33 MEM_OUT: 6 ACC: 7 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 76 PC: 7 ADDR: 33 MEM_OUT: 7 ACC: 7 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 79 PC: 8 ADDR: 7 MEM_OUT: 32 ACC: 32 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'What ' << ' '
+  DEBUG   machine:simulation    TICK: 81 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 32 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 83 PC: 10 ADDR: 32 MEM_OUT: 14 ACC: 14 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 84 PC: 11 ADDR: 32 MEM_OUT: 14 ACC: 13 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 86 PC: 12 ADDR: 32 MEM_OUT: 13 ACC: 13 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 87 PC: 4 ADDR: 32 MEM_OUT: 13 ACC: 13 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 89 PC: 5 ADDR: 33 MEM_OUT: 7 ACC: 7 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 90 PC: 6 ADDR: 33 MEM_OUT: 7 ACC: 8 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 92 PC: 7 ADDR: 33 MEM_OUT: 8 ACC: 8 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 95 PC: 8 ADDR: 8 MEM_OUT: 105 ACC: 105 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'What i' << 'i'
+  DEBUG   machine:simulation    TICK: 97 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 105 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 99 PC: 10 ADDR: 32 MEM_OUT: 13 ACC: 13 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 100 PC: 11 ADDR: 32 MEM_OUT: 13 ACC: 12 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 102 PC: 12 ADDR: 32 MEM_OUT: 12 ACC: 12 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 103 PC: 4 ADDR: 32 MEM_OUT: 12 ACC: 12 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 105 PC: 5 ADDR: 33 MEM_OUT: 8 ACC: 8 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 106 PC: 6 ADDR: 33 MEM_OUT: 8 ACC: 9 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 108 PC: 7 ADDR: 33 MEM_OUT: 9 ACC: 9 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 111 PC: 8 ADDR: 9 MEM_OUT: 115 ACC: 115 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'What is' << 's'
+  DEBUG   machine:simulation    TICK: 113 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 115 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 115 PC: 10 ADDR: 32 MEM_OUT: 12 ACC: 12 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 116 PC: 11 ADDR: 32 MEM_OUT: 12 ACC: 11 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 118 PC: 12 ADDR: 32 MEM_OUT: 11 ACC: 11 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 119 PC: 4 ADDR: 32 MEM_OUT: 11 ACC: 11 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 121 PC: 5 ADDR: 33 MEM_OUT: 9 ACC: 9 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 122 PC: 6 ADDR: 33 MEM_OUT: 9 ACC: 10 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 124 PC: 7 ADDR: 33 MEM_OUT: 10 ACC: 10 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 127 PC: 8 ADDR: 10 MEM_OUT: 32 ACC: 32 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'What is ' << ' '
+  DEBUG   machine:simulation    TICK: 129 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 32 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 131 PC: 10 ADDR: 32 MEM_OUT: 11 ACC: 11 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 132 PC: 11 ADDR: 32 MEM_OUT: 11 ACC: 10 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 134 PC: 12 ADDR: 32 MEM_OUT: 10 ACC: 10 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 135 PC: 4 ADDR: 32 MEM_OUT: 10 ACC: 10 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 137 PC: 5 ADDR: 33 MEM_OUT: 10 ACC: 10 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 138 PC: 6 ADDR: 33 MEM_OUT: 10 ACC: 11 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 140 PC: 7 ADDR: 33 MEM_OUT: 11 ACC: 11 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 143 PC: 8 ADDR: 11 MEM_OUT: 121 ACC: 121 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'What is y' << 'y'
+  DEBUG   machine:simulation    TICK: 145 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 121 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 147 PC: 10 ADDR: 32 MEM_OUT: 10 ACC: 10 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 148 PC: 11 ADDR: 32 MEM_OUT: 10 ACC: 9 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 150 PC: 12 ADDR: 32 MEM_OUT: 9 ACC: 9 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 151 PC: 4 ADDR: 32 MEM_OUT: 9 ACC: 9 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 153 PC: 5 ADDR: 33 MEM_OUT: 11 ACC: 11 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 154 PC: 6 ADDR: 33 MEM_OUT: 11 ACC: 12 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 156 PC: 7 ADDR: 33 MEM_OUT: 12 ACC: 12 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 159 PC: 8 ADDR: 12 MEM_OUT: 111 ACC: 111 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'What is yo' << 'o'
+  DEBUG   machine:simulation    TICK: 161 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 111 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 163 PC: 10 ADDR: 32 MEM_OUT: 9 ACC: 9 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 164 PC: 11 ADDR: 32 MEM_OUT: 9 ACC: 8 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 166 PC: 12 ADDR: 32 MEM_OUT: 8 ACC: 8 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 167 PC: 4 ADDR: 32 MEM_OUT: 8 ACC: 8 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 169 PC: 5 ADDR: 33 MEM_OUT: 12 ACC: 12 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 170 PC: 6 ADDR: 33 MEM_OUT: 12 ACC: 13 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 172 PC: 7 ADDR: 33 MEM_OUT: 13 ACC: 13 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 175 PC: 8 ADDR: 13 MEM_OUT: 117 ACC: 117 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'What is you' << 'u'
+  DEBUG   machine:simulation    TICK: 177 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 117 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 179 PC: 10 ADDR: 32 MEM_OUT: 8 ACC: 8 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 180 PC: 11 ADDR: 32 MEM_OUT: 8 ACC: 7 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 182 PC: 12 ADDR: 32 MEM_OUT: 7 ACC: 7 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 183 PC: 4 ADDR: 32 MEM_OUT: 7 ACC: 7 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 185 PC: 5 ADDR: 33 MEM_OUT: 13 ACC: 13 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 186 PC: 6 ADDR: 33 MEM_OUT: 13 ACC: 14 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 188 PC: 7 ADDR: 33 MEM_OUT: 14 ACC: 14 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 191 PC: 8 ADDR: 14 MEM_OUT: 114 ACC: 114 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'What is your' << 'r'
+  DEBUG   machine:simulation    TICK: 193 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 114 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 195 PC: 10 ADDR: 32 MEM_OUT: 7 ACC: 7 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 196 PC: 11 ADDR: 32 MEM_OUT: 7 ACC: 6 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 198 PC: 12 ADDR: 32 MEM_OUT: 6 ACC: 6 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 199 PC: 4 ADDR: 32 MEM_OUT: 6 ACC: 6 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 201 PC: 5 ADDR: 33 MEM_OUT: 14 ACC: 14 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 202 PC: 6 ADDR: 33 MEM_OUT: 14 ACC: 15 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 204 PC: 7 ADDR: 33 MEM_OUT: 15 ACC: 15 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 207 PC: 8 ADDR: 15 MEM_OUT: 32 ACC: 32 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'What is your ' << ' '
+  DEBUG   machine:simulation    TICK: 209 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 32 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 211 PC: 10 ADDR: 32 MEM_OUT: 6 ACC: 6 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 212 PC: 11 ADDR: 32 MEM_OUT: 6 ACC: 5 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 214 PC: 12 ADDR: 32 MEM_OUT: 5 ACC: 5 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 215 PC: 4 ADDR: 32 MEM_OUT: 5 ACC: 5 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 217 PC: 5 ADDR: 33 MEM_OUT: 15 ACC: 15 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 218 PC: 6 ADDR: 33 MEM_OUT: 15 ACC: 16 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 220 PC: 7 ADDR: 33 MEM_OUT: 16 ACC: 16 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 223 PC: 8 ADDR: 16 MEM_OUT: 110 ACC: 110 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'What is your n' << 'n'
+  DEBUG   machine:simulation    TICK: 225 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 110 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 227 PC: 10 ADDR: 32 MEM_OUT: 5 ACC: 5 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 228 PC: 11 ADDR: 32 MEM_OUT: 5 ACC: 4 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 230 PC: 12 ADDR: 32 MEM_OUT: 4 ACC: 4 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 231 PC: 4 ADDR: 32 MEM_OUT: 4 ACC: 4 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 233 PC: 5 ADDR: 33 MEM_OUT: 16 ACC: 16 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 234 PC: 6 ADDR: 33 MEM_OUT: 16 ACC: 17 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 236 PC: 7 ADDR: 33 MEM_OUT: 17 ACC: 17 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 239 PC: 8 ADDR: 17 MEM_OUT: 97 ACC: 97 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'What is your na' << 'a'
+  DEBUG   machine:simulation    TICK: 241 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 97 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 243 PC: 10 ADDR: 32 MEM_OUT: 4 ACC: 4 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 244 PC: 11 ADDR: 32 MEM_OUT: 4 ACC: 3 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 246 PC: 12 ADDR: 32 MEM_OUT: 3 ACC: 3 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 247 PC: 4 ADDR: 32 MEM_OUT: 3 ACC: 3 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 249 PC: 5 ADDR: 33 MEM_OUT: 17 ACC: 17 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 250 PC: 6 ADDR: 33 MEM_OUT: 17 ACC: 18 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 252 PC: 7 ADDR: 33 MEM_OUT: 18 ACC: 18 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 255 PC: 8 ADDR: 18 MEM_OUT: 109 ACC: 109 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'What is your nam' << 'm'
+  DEBUG   machine:simulation    TICK: 257 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 109 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 259 PC: 10 ADDR: 32 MEM_OUT: 3 ACC: 3 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 260 PC: 11 ADDR: 32 MEM_OUT: 3 ACC: 2 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 262 PC: 12 ADDR: 32 MEM_OUT: 2 ACC: 2 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 263 PC: 4 ADDR: 32 MEM_OUT: 2 ACC: 2 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 265 PC: 5 ADDR: 33 MEM_OUT: 18 ACC: 18 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 266 PC: 6 ADDR: 33 MEM_OUT: 18 ACC: 19 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 268 PC: 7 ADDR: 33 MEM_OUT: 19 ACC: 19 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 271 PC: 8 ADDR: 19 MEM_OUT: 101 ACC: 101 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'What is your name' << 'e'
+  DEBUG   machine:simulation    TICK: 273 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 101 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 275 PC: 10 ADDR: 32 MEM_OUT: 2 ACC: 2 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 276 PC: 11 ADDR: 32 MEM_OUT: 2 ACC: 1 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 278 PC: 12 ADDR: 32 MEM_OUT: 1 ACC: 1 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 279 PC: 4 ADDR: 32 MEM_OUT: 1 ACC: 1 	load 33  ('load last_addr'@29)
+  DEBUG   machine:simulation    TICK: 281 PC: 5 ADDR: 33 MEM_OUT: 19 ACC: 19 	inc  ('inc'@30)
+  DEBUG   machine:simulation    TICK: 282 PC: 6 ADDR: 33 MEM_OUT: 19 ACC: 20 	store 33  ('store last_addr'@31)
+  DEBUG   machine:simulation    TICK: 284 PC: 7 ADDR: 33 MEM_OUT: 20 ACC: 20 	ld 33  ('ld last_addr'@33)
+  DEBUG   machine:simulation    TICK: 287 PC: 8 ADDR: 20 MEM_OUT: 63 ACC: 63 	store 1  ('store output'@34)
+  DEBUG   machine:signal_wr     output: 'What is your name?' << '?'
+  DEBUG   machine:simulation    TICK: 289 PC: 9 ADDR: 1 MEM_OUT: 0 ACC: 63 	load 32  ('load counter'@36)
+  DEBUG   machine:simulation    TICK: 291 PC: 10 ADDR: 32 MEM_OUT: 1 ACC: 1 	dec  ('dec'@37)
+  DEBUG   machine:simulation    TICK: 292 PC: 11 ADDR: 32 MEM_OUT: 1 ACC: 0 	store 32  ('store counter'@38)
+  DEBUG   machine:simulation    TICK: 294 PC: 12 ADDR: 32 MEM_OUT: 0 ACC: 0 	jnz 4  ('jnz loop'@39)
+  DEBUG   machine:simulation    TICK: 295 PC: 13 ADDR: 32 MEM_OUT: 0 ACC: 0 	load 31  ('load new_line_code'@41)
+  DEBUG   machine:simulation    TICK: 297 PC: 14 ADDR: 31 MEM_OUT: 10 ACC: 10 	store 1  ('store output'@42)
+  DEBUG   machine:signal_wr     output: 'What is your name?\n' << '\n'
+  DEBUG   machine:simulation    TICK: 299 PC: 15 ADDR: 1 MEM_OUT: 0 ACC: 10 	mov 34  ('mov buffer'@44)
+  DEBUG   machine:simulation    TICK: 300 PC: 16 ADDR: 1 MEM_OUT: 0 ACC: 34 	inc  ('inc'@45)
+  DEBUG   machine:simulation    TICK: 301 PC: 17 ADDR: 1 MEM_OUT: 0 ACC: 35 	store 33  ('store last_addr'@46)
+  DEBUG   machine:simulation    TICK: 303 PC: 18 ADDR: 33 MEM_OUT: 35 ACC: 35 	load 0  ('load input'@49)
+  DEBUG   machine:signal_latch_acc input: 'A' 
+  DEBUG   machine:simulation    TICK: 305 PC: 19 ADDR: 0 MEM_OUT: 0 ACC: 65 	sub 31  ('sub new_line_code'@50)
+  DEBUG   machine:simulation    TICK: 307 PC: 20 ADDR: 31 MEM_OUT: 10 ACC: 55 	jz 30  ('jz input_break'@51)
+  DEBUG   machine:simulation    TICK: 308 PC: 21 ADDR: 31 MEM_OUT: 10 ACC: 55 	add 31  ('add new_line_code'@52)
+  DEBUG   machine:simulation    TICK: 310 PC: 22 ADDR: 31 MEM_OUT: 10 ACC: 65 	st 33  ('st last_addr'@53)
+  DEBUG   machine:simulation    TICK: 313 PC: 23 ADDR: 35 MEM_OUT: 65 ACC: 65 	load 33  ('load last_addr'@55)
+  DEBUG   machine:simulation    TICK: 315 PC: 24 ADDR: 33 MEM_OUT: 35 ACC: 35 	inc  ('inc'@56)
+  DEBUG   machine:simulation    TICK: 316 PC: 25 ADDR: 33 MEM_OUT: 35 ACC: 36 	store 33  ('store last_addr'@57)
+  DEBUG   machine:simulation    TICK: 318 PC: 26 ADDR: 33 MEM_OUT: 36 ACC: 36 	load 34  ('load buffer'@59)
+  DEBUG   machine:simulation    TICK: 320 PC: 27 ADDR: 34 MEM_OUT: 0 ACC: 0 	inc  ('inc'@60)
+  DEBUG   machine:simulation    TICK: 321 PC: 28 ADDR: 34 MEM_OUT: 0 ACC: 1 	store 34  ('store buffer'@61)
+  DEBUG   machine:simulation    TICK: 323 PC: 29 ADDR: 34 MEM_OUT: 1 ACC: 1 	jmp 18  ('jmp input_loop'@63)
+  DEBUG   machine:simulation    TICK: 324 PC: 18 ADDR: 34 MEM_OUT: 1 ACC: 1 	load 0  ('load input'@49)
+  DEBUG   machine:signal_latch_acc input: 'l' 
+  DEBUG   machine:simulation    TICK: 326 PC: 19 ADDR: 0 MEM_OUT: 0 ACC: 108 	sub 31  ('sub new_line_code'@50)
+  DEBUG   machine:simulation    TICK: 328 PC: 20 ADDR: 31 MEM_OUT: 10 ACC: 98 	jz 30  ('jz input_break'@51)
+  DEBUG   machine:simulation    TICK: 329 PC: 21 ADDR: 31 MEM_OUT: 10 ACC: 98 	add 31  ('add new_line_code'@52)
+  DEBUG   machine:simulation    TICK: 331 PC: 22 ADDR: 31 MEM_OUT: 10 ACC: 108 	st 33  ('st last_addr'@53)
+  DEBUG   machine:simulation    TICK: 334 PC: 23 ADDR: 36 MEM_OUT: 108 ACC: 108 	load 33  ('load last_addr'@55)
+  DEBUG   machine:simulation    TICK: 336 PC: 24 ADDR: 33 MEM_OUT: 36 ACC: 36 	inc  ('inc'@56)
+  DEBUG   machine:simulation    TICK: 337 PC: 25 ADDR: 33 MEM_OUT: 36 ACC: 37 	store 33  ('store last_addr'@57)
+  DEBUG   machine:simulation    TICK: 339 PC: 26 ADDR: 33 MEM_OUT: 37 ACC: 37 	load 34  ('load buffer'@59)
+  DEBUG   machine:simulation    TICK: 341 PC: 27 ADDR: 34 MEM_OUT: 1 ACC: 1 	inc  ('inc'@60)
+  DEBUG   machine:simulation    TICK: 342 PC: 28 ADDR: 34 MEM_OUT: 1 ACC: 2 	store 34  ('store buffer'@61)
+  DEBUG   machine:simulation    TICK: 344 PC: 29 ADDR: 34 MEM_OUT: 2 ACC: 2 	jmp 18  ('jmp input_loop'@63)
+  DEBUG   machine:simulation    TICK: 345 PC: 18 ADDR: 34 MEM_OUT: 2 ACC: 2 	load 0  ('load input'@49)
+  DEBUG   machine:signal_latch_acc input: 'i' 
+  DEBUG   machine:simulation    TICK: 347 PC: 19 ADDR: 0 MEM_OUT: 0 ACC: 105 	sub 31  ('sub new_line_code'@50)
+  DEBUG   machine:simulation    TICK: 349 PC: 20 ADDR: 31 MEM_OUT: 10 ACC: 95 	jz 30  ('jz input_break'@51)
+  DEBUG   machine:simulation    TICK: 350 PC: 21 ADDR: 31 MEM_OUT: 10 ACC: 95 	add 31  ('add new_line_code'@52)
+  DEBUG   machine:simulation    TICK: 352 PC: 22 ADDR: 31 MEM_OUT: 10 ACC: 105 	st 33  ('st last_addr'@53)
+  DEBUG   machine:simulation    TICK: 355 PC: 23 ADDR: 37 MEM_OUT: 105 ACC: 105 	load 33  ('load last_addr'@55)
+  DEBUG   machine:simulation    TICK: 357 PC: 24 ADDR: 33 MEM_OUT: 37 ACC: 37 	inc  ('inc'@56)
+  DEBUG   machine:simulation    TICK: 358 PC: 25 ADDR: 33 MEM_OUT: 37 ACC: 38 	store 33  ('store last_addr'@57)
+  DEBUG   machine:simulation    TICK: 360 PC: 26 ADDR: 33 MEM_OUT: 38 ACC: 38 	load 34  ('load buffer'@59)
+  DEBUG   machine:simulation    TICK: 362 PC: 27 ADDR: 34 MEM_OUT: 2 ACC: 2 	inc  ('inc'@60)
+  DEBUG   machine:simulation    TICK: 363 PC: 28 ADDR: 34 MEM_OUT: 2 ACC: 3 	store 34  ('store buffer'@61)
+  DEBUG   machine:simulation    TICK: 365 PC: 29 ADDR: 34 MEM_OUT: 3 ACC: 3 	jmp 18  ('jmp input_loop'@63)
+  DEBUG   machine:simulation    TICK: 366 PC: 18 ADDR: 34 MEM_OUT: 3 ACC: 3 	load 0  ('load input'@49)
+  DEBUG   machine:signal_latch_acc input: 'c' 
+  DEBUG   machine:simulation    TICK: 368 PC: 19 ADDR: 0 MEM_OUT: 0 ACC: 99 	sub 31  ('sub new_line_code'@50)
+  DEBUG   machine:simulation    TICK: 370 PC: 20 ADDR: 31 MEM_OUT: 10 ACC: 89 	jz 30  ('jz input_break'@51)
+  DEBUG   machine:simulation    TICK: 371 PC: 21 ADDR: 31 MEM_OUT: 10 ACC: 89 	add 31  ('add new_line_code'@52)
+  DEBUG   machine:simulation    TICK: 373 PC: 22 ADDR: 31 MEM_OUT: 10 ACC: 99 	st 33  ('st last_addr'@53)
+  DEBUG   machine:simulation    TICK: 376 PC: 23 ADDR: 38 MEM_OUT: 99 ACC: 99 	load 33  ('load last_addr'@55)
+  DEBUG   machine:simulation    TICK: 378 PC: 24 ADDR: 33 MEM_OUT: 38 ACC: 38 	inc  ('inc'@56)
+  DEBUG   machine:simulation    TICK: 379 PC: 25 ADDR: 33 MEM_OUT: 38 ACC: 39 	store 33  ('store last_addr'@57)
+  DEBUG   machine:simulation    TICK: 381 PC: 26 ADDR: 33 MEM_OUT: 39 ACC: 39 	load 34  ('load buffer'@59)
+  DEBUG   machine:simulation    TICK: 383 PC: 27 ADDR: 34 MEM_OUT: 3 ACC: 3 	inc  ('inc'@60)
+  DEBUG   machine:simulation    TICK: 384 PC: 28 ADDR: 34 MEM_OUT: 3 ACC: 4 	store 34  ('store buffer'@61)
+  DEBUG   machine:simulation    TICK: 386 PC: 29 ADDR: 34 MEM_OUT: 4 ACC: 4 	jmp 18  ('jmp input_loop'@63)
+  DEBUG   machine:simulation    TICK: 387 PC: 18 ADDR: 34 MEM_OUT: 4 ACC: 4 	load 0  ('load input'@49)
+  DEBUG   machine:signal_latch_acc input: 'e' 
+  DEBUG   machine:simulation    TICK: 389 PC: 19 ADDR: 0 MEM_OUT: 0 ACC: 101 	sub 31  ('sub new_line_code'@50)
+  DEBUG   machine:simulation    TICK: 391 PC: 20 ADDR: 31 MEM_OUT: 10 ACC: 91 	jz 30  ('jz input_break'@51)
+  DEBUG   machine:simulation    TICK: 392 PC: 21 ADDR: 31 MEM_OUT: 10 ACC: 91 	add 31  ('add new_line_code'@52)
+  DEBUG   machine:simulation    TICK: 394 PC: 22 ADDR: 31 MEM_OUT: 10 ACC: 101 	st 33  ('st last_addr'@53)
+  DEBUG   machine:simulation    TICK: 397 PC: 23 ADDR: 39 MEM_OUT: 101 ACC: 101 	load 33  ('load last_addr'@55)
+  DEBUG   machine:simulation    TICK: 399 PC: 24 ADDR: 33 MEM_OUT: 39 ACC: 39 	inc  ('inc'@56)
+  DEBUG   machine:simulation    TICK: 400 PC: 25 ADDR: 33 MEM_OUT: 39 ACC: 40 	store 33  ('store last_addr'@57)
+  DEBUG   machine:simulation    TICK: 402 PC: 26 ADDR: 33 MEM_OUT: 40 ACC: 40 	load 34  ('load buffer'@59)
+  DEBUG   machine:simulation    TICK: 404 PC: 27 ADDR: 34 MEM_OUT: 4 ACC: 4 	inc  ('inc'@60)
+  DEBUG   machine:simulation    TICK: 405 PC: 28 ADDR: 34 MEM_OUT: 4 ACC: 5 	store 34  ('store buffer'@61)
+  DEBUG   machine:simulation    TICK: 407 PC: 29 ADDR: 34 MEM_OUT: 5 ACC: 5 	jmp 18  ('jmp input_loop'@63)
+  DEBUG   machine:simulation    TICK: 408 PC: 18 ADDR: 34 MEM_OUT: 5 ACC: 5 	load 0  ('load input'@49)
+  DEBUG   machine:signal_latch_acc input: '\n' 
+  DEBUG   machine:simulation    TICK: 410 PC: 19 ADDR: 0 MEM_OUT: 0 ACC: 10 	sub 31  ('sub new_line_code'@50)
+  DEBUG   machine:simulation    TICK: 412 PC: 20 ADDR: 31 MEM_OUT: 10 ACC: 0 	jz 30  ('jz input_break'@51)
+  DEBUG   machine:simulation    TICK: 413 PC: 30 ADDR: 31 MEM_OUT: 10 ACC: 0 	load 21  ('load text2'@66)
+  DEBUG   machine:simulation    TICK: 415 PC: 31 ADDR: 21 MEM_OUT: 7 ACC: 7 	store 32  ('store counter'@67)
+  DEBUG   machine:simulation    TICK: 417 PC: 32 ADDR: 32 MEM_OUT: 7 ACC: 7 	mov 21  ('mov text2'@68)
+  DEBUG   machine:simulation    TICK: 418 PC: 33 ADDR: 32 MEM_OUT: 7 ACC: 21 	store 33  ('store last_addr'@69)
+  DEBUG   machine:simulation    TICK: 420 PC: 34 ADDR: 33 MEM_OUT: 21 ACC: 21 	load 33  ('load last_addr'@71)
+  DEBUG   machine:simulation    TICK: 422 PC: 35 ADDR: 33 MEM_OUT: 21 ACC: 21 	inc  ('inc'@72)
+  DEBUG   machine:simulation    TICK: 423 PC: 36 ADDR: 33 MEM_OUT: 21 ACC: 22 	store 33  ('store last_addr'@73)
+  DEBUG   machine:simulation    TICK: 425 PC: 37 ADDR: 33 MEM_OUT: 22 ACC: 22 	ld 33  ('ld last_addr'@75)
+  DEBUG   machine:simulation    TICK: 428 PC: 38 ADDR: 22 MEM_OUT: 72 ACC: 72 	store 1  ('store output'@76)
+  DEBUG   machine:signal_wr     output: 'What is your name?\nH' << 'H'
+  DEBUG   machine:simulation    TICK: 430 PC: 39 ADDR: 1 MEM_OUT: 0 ACC: 72 	load 32  ('load counter'@78)
+  DEBUG   machine:simulation    TICK: 432 PC: 40 ADDR: 32 MEM_OUT: 7 ACC: 7 	dec  ('dec'@79)
+  DEBUG   machine:simulation    TICK: 433 PC: 41 ADDR: 32 MEM_OUT: 7 ACC: 6 	store 32  ('store counter'@80)
+  DEBUG   machine:simulation    TICK: 435 PC: 42 ADDR: 32 MEM_OUT: 6 ACC: 6 	jnz 34  ('jnz loop2'@81)
+  DEBUG   machine:simulation    TICK: 436 PC: 34 ADDR: 32 MEM_OUT: 6 ACC: 6 	load 33  ('load last_addr'@71)
+  DEBUG   machine:simulation    TICK: 438 PC: 35 ADDR: 33 MEM_OUT: 22 ACC: 22 	inc  ('inc'@72)
+  DEBUG   machine:simulation    TICK: 439 PC: 36 ADDR: 33 MEM_OUT: 22 ACC: 23 	store 33  ('store last_addr'@73)
+  DEBUG   machine:simulation    TICK: 441 PC: 37 ADDR: 33 MEM_OUT: 23 ACC: 23 	ld 33  ('ld last_addr'@75)
+  DEBUG   machine:simulation    TICK: 444 PC: 38 ADDR: 23 MEM_OUT: 101 ACC: 101 	store 1  ('store output'@76)
+  DEBUG   machine:signal_wr     output: 'What is your name?\nHe' << 'e'
+  DEBUG   machine:simulation    TICK: 446 PC: 39 ADDR: 1 MEM_OUT: 0 ACC: 101 	load 32  ('load counter'@78)
+  DEBUG   machine:simulation    TICK: 448 PC: 40 ADDR: 32 MEM_OUT: 6 ACC: 6 	dec  ('dec'@79)
+  DEBUG   machine:simulation    TICK: 449 PC: 41 ADDR: 32 MEM_OUT: 6 ACC: 5 	store 32  ('store counter'@80)
+  DEBUG   machine:simulation    TICK: 451 PC: 42 ADDR: 32 MEM_OUT: 5 ACC: 5 	jnz 34  ('jnz loop2'@81)
+  DEBUG   machine:simulation    TICK: 452 PC: 34 ADDR: 32 MEM_OUT: 5 ACC: 5 	load 33  ('load last_addr'@71)
+  DEBUG   machine:simulation    TICK: 454 PC: 35 ADDR: 33 MEM_OUT: 23 ACC: 23 	inc  ('inc'@72)
+  DEBUG   machine:simulation    TICK: 455 PC: 36 ADDR: 33 MEM_OUT: 23 ACC: 24 	store 33  ('store last_addr'@73)
+  DEBUG   machine:simulation    TICK: 457 PC: 37 ADDR: 33 MEM_OUT: 24 ACC: 24 	ld 33  ('ld last_addr'@75)
+  DEBUG   machine:simulation    TICK: 460 PC: 38 ADDR: 24 MEM_OUT: 108 ACC: 108 	store 1  ('store output'@76)
+  DEBUG   machine:signal_wr     output: 'What is your name?\nHel' << 'l'
+  DEBUG   machine:simulation    TICK: 462 PC: 39 ADDR: 1 MEM_OUT: 0 ACC: 108 	load 32  ('load counter'@78)
+  DEBUG   machine:simulation    TICK: 464 PC: 40 ADDR: 32 MEM_OUT: 5 ACC: 5 	dec  ('dec'@79)
+  DEBUG   machine:simulation    TICK: 465 PC: 41 ADDR: 32 MEM_OUT: 5 ACC: 4 	store 32  ('store counter'@80)
+  DEBUG   machine:simulation    TICK: 467 PC: 42 ADDR: 32 MEM_OUT: 4 ACC: 4 	jnz 34  ('jnz loop2'@81)
+  DEBUG   machine:simulation    TICK: 468 PC: 34 ADDR: 32 MEM_OUT: 4 ACC: 4 	load 33  ('load last_addr'@71)
+  DEBUG   machine:simulation    TICK: 470 PC: 35 ADDR: 33 MEM_OUT: 24 ACC: 24 	inc  ('inc'@72)
+  DEBUG   machine:simulation    TICK: 471 PC: 36 ADDR: 33 MEM_OUT: 24 ACC: 25 	store 33  ('store last_addr'@73)
+  DEBUG   machine:simulation    TICK: 473 PC: 37 ADDR: 33 MEM_OUT: 25 ACC: 25 	ld 33  ('ld last_addr'@75)
+  DEBUG   machine:simulation    TICK: 476 PC: 38 ADDR: 25 MEM_OUT: 108 ACC: 108 	store 1  ('store output'@76)
+  DEBUG   machine:signal_wr     output: 'What is your name?\nHell' << 'l'
+  DEBUG   machine:simulation    TICK: 478 PC: 39 ADDR: 1 MEM_OUT: 0 ACC: 108 	load 32  ('load counter'@78)
+  DEBUG   machine:simulation    TICK: 480 PC: 40 ADDR: 32 MEM_OUT: 4 ACC: 4 	dec  ('dec'@79)
+  DEBUG   machine:simulation    TICK: 481 PC: 41 ADDR: 32 MEM_OUT: 4 ACC: 3 	store 32  ('store counter'@80)
+  DEBUG   machine:simulation    TICK: 483 PC: 42 ADDR: 32 MEM_OUT: 3 ACC: 3 	jnz 34  ('jnz loop2'@81)
+  DEBUG   machine:simulation    TICK: 484 PC: 34 ADDR: 32 MEM_OUT: 3 ACC: 3 	load 33  ('load last_addr'@71)
+  DEBUG   machine:simulation    TICK: 486 PC: 35 ADDR: 33 MEM_OUT: 25 ACC: 25 	inc  ('inc'@72)
+  DEBUG   machine:simulation    TICK: 487 PC: 36 ADDR: 33 MEM_OUT: 25 ACC: 26 	store 33  ('store last_addr'@73)
+  DEBUG   machine:simulation    TICK: 489 PC: 37 ADDR: 33 MEM_OUT: 26 ACC: 26 	ld 33  ('ld last_addr'@75)
+  DEBUG   machine:simulation    TICK: 492 PC: 38 ADDR: 26 MEM_OUT: 111 ACC: 111 	store 1  ('store output'@76)
+  DEBUG   machine:signal_wr     output: 'What is your name?\nHello' << 'o'
+  DEBUG   machine:simulation    TICK: 494 PC: 39 ADDR: 1 MEM_OUT: 0 ACC: 111 	load 32  ('load counter'@78)
+  DEBUG   machine:simulation    TICK: 496 PC: 40 ADDR: 32 MEM_OUT: 3 ACC: 3 	dec  ('dec'@79)
+  DEBUG   machine:simulation    TICK: 497 PC: 41 ADDR: 32 MEM_OUT: 3 ACC: 2 	store 32  ('store counter'@80)
+  DEBUG   machine:simulation    TICK: 499 PC: 42 ADDR: 32 MEM_OUT: 2 ACC: 2 	jnz 34  ('jnz loop2'@81)
+  DEBUG   machine:simulation    TICK: 500 PC: 34 ADDR: 32 MEM_OUT: 2 ACC: 2 	load 33  ('load last_addr'@71)
+  DEBUG   machine:simulation    TICK: 502 PC: 35 ADDR: 33 MEM_OUT: 26 ACC: 26 	inc  ('inc'@72)
+  DEBUG   machine:simulation    TICK: 503 PC: 36 ADDR: 33 MEM_OUT: 26 ACC: 27 	store 33  ('store last_addr'@73)
+  DEBUG   machine:simulation    TICK: 505 PC: 37 ADDR: 33 MEM_OUT: 27 ACC: 27 	ld 33  ('ld last_addr'@75)
+  DEBUG   machine:simulation    TICK: 508 PC: 38 ADDR: 27 MEM_OUT: 44 ACC: 44 	store 1  ('store output'@76)
+  DEBUG   machine:signal_wr     output: 'What is your name?\nHello,' << ','
+  DEBUG   machine:simulation    TICK: 510 PC: 39 ADDR: 1 MEM_OUT: 0 ACC: 44 	load 32  ('load counter'@78)
+  DEBUG   machine:simulation    TICK: 512 PC: 40 ADDR: 32 MEM_OUT: 2 ACC: 2 	dec  ('dec'@79)
+  DEBUG   machine:simulation    TICK: 513 PC: 41 ADDR: 32 MEM_OUT: 2 ACC: 1 	store 32  ('store counter'@80)
+  DEBUG   machine:simulation    TICK: 515 PC: 42 ADDR: 32 MEM_OUT: 1 ACC: 1 	jnz 34  ('jnz loop2'@81)
+  DEBUG   machine:simulation    TICK: 516 PC: 34 ADDR: 32 MEM_OUT: 1 ACC: 1 	load 33  ('load last_addr'@71)
+  DEBUG   machine:simulation    TICK: 518 PC: 35 ADDR: 33 MEM_OUT: 27 ACC: 27 	inc  ('inc'@72)
+  DEBUG   machine:simulation    TICK: 519 PC: 36 ADDR: 33 MEM_OUT: 27 ACC: 28 	store 33  ('store last_addr'@73)
+  DEBUG   machine:simulation    TICK: 521 PC: 37 ADDR: 33 MEM_OUT: 28 ACC: 28 	ld 33  ('ld last_addr'@75)
+  DEBUG   machine:simulation    TICK: 524 PC: 38 ADDR: 28 MEM_OUT: 32 ACC: 32 	store 1  ('store output'@76)
+  DEBUG   machine:signal_wr     output: 'What is your name?\nHello, ' << ' '
+  DEBUG   machine:simulation    TICK: 526 PC: 39 ADDR: 1 MEM_OUT: 0 ACC: 32 	load 32  ('load counter'@78)
+  DEBUG   machine:simulation    TICK: 528 PC: 40 ADDR: 32 MEM_OUT: 1 ACC: 1 	dec  ('dec'@79)
+  DEBUG   machine:simulation    TICK: 529 PC: 41 ADDR: 32 MEM_OUT: 1 ACC: 0 	store 32  ('store counter'@80)
+  DEBUG   machine:simulation    TICK: 531 PC: 42 ADDR: 32 MEM_OUT: 0 ACC: 0 	jnz 34  ('jnz loop2'@81)
+  DEBUG   machine:simulation    TICK: 532 PC: 43 ADDR: 32 MEM_OUT: 0 ACC: 0 	load 34  ('load buffer'@83)
+  DEBUG   machine:simulation    TICK: 534 PC: 44 ADDR: 34 MEM_OUT: 5 ACC: 5 	store 32  ('store counter'@84)
+  DEBUG   machine:simulation    TICK: 536 PC: 45 ADDR: 32 MEM_OUT: 5 ACC: 5 	mov 34  ('mov buffer'@85)
+  DEBUG   machine:simulation    TICK: 537 PC: 46 ADDR: 32 MEM_OUT: 5 ACC: 34 	store 33  ('store last_addr'@86)
+  DEBUG   machine:simulation    TICK: 539 PC: 47 ADDR: 33 MEM_OUT: 34 ACC: 34 	load 33  ('load last_addr'@88)
+  DEBUG   machine:simulation    TICK: 541 PC: 48 ADDR: 33 MEM_OUT: 34 ACC: 34 	inc  ('inc'@89)
+  DEBUG   machine:simulation    TICK: 542 PC: 49 ADDR: 33 MEM_OUT: 34 ACC: 35 	store 33  ('store last_addr'@90)
+  DEBUG   machine:simulation    TICK: 544 PC: 50 ADDR: 33 MEM_OUT: 35 ACC: 35 	ld 33  ('ld last_addr'@92)
+  DEBUG   machine:simulation    TICK: 547 PC: 51 ADDR: 35 MEM_OUT: 65 ACC: 65 	store 1  ('store output'@93)
+  DEBUG   machine:signal_wr     output: 'What is your name?\nHello, A' << 'A'
+  DEBUG   machine:simulation    TICK: 549 PC: 52 ADDR: 1 MEM_OUT: 0 ACC: 65 	load 32  ('load counter'@95)
+  DEBUG   machine:simulation    TICK: 551 PC: 53 ADDR: 32 MEM_OUT: 5 ACC: 5 	dec  ('dec'@96)
+  DEBUG   machine:simulation    TICK: 552 PC: 54 ADDR: 32 MEM_OUT: 5 ACC: 4 	store 32  ('store counter'@97)
+  DEBUG   machine:simulation    TICK: 554 PC: 55 ADDR: 32 MEM_OUT: 4 ACC: 4 	jnz 47  ('jnz loop3'@98)
+  DEBUG   machine:simulation    TICK: 555 PC: 47 ADDR: 32 MEM_OUT: 4 ACC: 4 	load 33  ('load last_addr'@88)
+  DEBUG   machine:simulation    TICK: 557 PC: 48 ADDR: 33 MEM_OUT: 35 ACC: 35 	inc  ('inc'@89)
+  DEBUG   machine:simulation    TICK: 558 PC: 49 ADDR: 33 MEM_OUT: 35 ACC: 36 	store 33  ('store last_addr'@90)
+  DEBUG   machine:simulation    TICK: 560 PC: 50 ADDR: 33 MEM_OUT: 36 ACC: 36 	ld 33  ('ld last_addr'@92)
+  DEBUG   machine:simulation    TICK: 563 PC: 51 ADDR: 36 MEM_OUT: 108 ACC: 108 	store 1  ('store output'@93)
+  DEBUG   machine:signal_wr     output: 'What is your name?\nHello, Al' << 'l'
+  DEBUG   machine:simulation    TICK: 565 PC: 52 ADDR: 1 MEM_OUT: 0 ACC: 108 	load 32  ('load counter'@95)
+  DEBUG   machine:simulation    TICK: 567 PC: 53 ADDR: 32 MEM_OUT: 4 ACC: 4 	dec  ('dec'@96)
+  DEBUG   machine:simulation    TICK: 568 PC: 54 ADDR: 32 MEM_OUT: 4 ACC: 3 	store 32  ('store counter'@97)
+  DEBUG   machine:simulation    TICK: 570 PC: 55 ADDR: 32 MEM_OUT: 3 ACC: 3 	jnz 47  ('jnz loop3'@98)
+  DEBUG   machine:simulation    TICK: 571 PC: 47 ADDR: 32 MEM_OUT: 3 ACC: 3 	load 33  ('load last_addr'@88)
+  DEBUG   machine:simulation    TICK: 573 PC: 48 ADDR: 33 MEM_OUT: 36 ACC: 36 	inc  ('inc'@89)
+  DEBUG   machine:simulation    TICK: 574 PC: 49 ADDR: 33 MEM_OUT: 36 ACC: 37 	store 33  ('store last_addr'@90)
+  DEBUG   machine:simulation    TICK: 576 PC: 50 ADDR: 33 MEM_OUT: 37 ACC: 37 	ld 33  ('ld last_addr'@92)
+  DEBUG   machine:simulation    TICK: 579 PC: 51 ADDR: 37 MEM_OUT: 105 ACC: 105 	store 1  ('store output'@93)
+  DEBUG   machine:signal_wr     output: 'What is your name?\nHello, Ali' << 'i'
+  DEBUG   machine:simulation    TICK: 581 PC: 52 ADDR: 1 MEM_OUT: 0 ACC: 105 	load 32  ('load counter'@95)
+  DEBUG   machine:simulation    TICK: 583 PC: 53 ADDR: 32 MEM_OUT: 3 ACC: 3 	dec  ('dec'@96)
+  DEBUG   machine:simulation    TICK: 584 PC: 54 ADDR: 32 MEM_OUT: 3 ACC: 2 	store 32  ('store counter'@97)
+  DEBUG   machine:simulation    TICK: 586 PC: 55 ADDR: 32 MEM_OUT: 2 ACC: 2 	jnz 47  ('jnz loop3'@98)
+  DEBUG   machine:simulation    TICK: 587 PC: 47 ADDR: 32 MEM_OUT: 2 ACC: 2 	load 33  ('load last_addr'@88)
+  DEBUG   machine:simulation    TICK: 589 PC: 48 ADDR: 33 MEM_OUT: 37 ACC: 37 	inc  ('inc'@89)
+  DEBUG   machine:simulation    TICK: 590 PC: 49 ADDR: 33 MEM_OUT: 37 ACC: 38 	store 33  ('store last_addr'@90)
+  DEBUG   machine:simulation    TICK: 592 PC: 50 ADDR: 33 MEM_OUT: 38 ACC: 38 	ld 33  ('ld last_addr'@92)
+  DEBUG   machine:simulation    TICK: 595 PC: 51 ADDR: 38 MEM_OUT: 99 ACC: 99 	store 1  ('store output'@93)
+  DEBUG   machine:signal_wr     output: 'What is your name?\nHello, Alic' << 'c'
+  DEBUG   machine:simulation    TICK: 597 PC: 52 ADDR: 1 MEM_OUT: 0 ACC: 99 	load 32  ('load counter'@95)
+  DEBUG   machine:simulation    TICK: 599 PC: 53 ADDR: 32 MEM_OUT: 2 ACC: 2 	dec  ('dec'@96)
+  DEBUG   machine:simulation    TICK: 600 PC: 54 ADDR: 32 MEM_OUT: 2 ACC: 1 	store 32  ('store counter'@97)
+  DEBUG   machine:simulation    TICK: 602 PC: 55 ADDR: 32 MEM_OUT: 1 ACC: 1 	jnz 47  ('jnz loop3'@98)
+  DEBUG   machine:simulation    TICK: 603 PC: 47 ADDR: 32 MEM_OUT: 1 ACC: 1 	load 33  ('load last_addr'@88)
+  DEBUG   machine:simulation    TICK: 605 PC: 48 ADDR: 33 MEM_OUT: 38 ACC: 38 	inc  ('inc'@89)
+  DEBUG   machine:simulation    TICK: 606 PC: 49 ADDR: 33 MEM_OUT: 38 ACC: 39 	store 33  ('store last_addr'@90)
+  DEBUG   machine:simulation    TICK: 608 PC: 50 ADDR: 33 MEM_OUT: 39 ACC: 39 	ld 33  ('ld last_addr'@92)
+  DEBUG   machine:simulation    TICK: 611 PC: 51 ADDR: 39 MEM_OUT: 101 ACC: 101 	store 1  ('store output'@93)
+  DEBUG   machine:signal_wr     output: 'What is your name?\nHello, Alice' << 'e'
+  DEBUG   machine:simulation    TICK: 613 PC: 52 ADDR: 1 MEM_OUT: 0 ACC: 101 	load 32  ('load counter'@95)
+  DEBUG   machine:simulation    TICK: 615 PC: 53 ADDR: 32 MEM_OUT: 1 ACC: 1 	dec  ('dec'@96)
+  DEBUG   machine:simulation    TICK: 616 PC: 54 ADDR: 32 MEM_OUT: 1 ACC: 0 	store 32  ('store counter'@97)
+  DEBUG   machine:simulation    TICK: 618 PC: 55 ADDR: 32 MEM_OUT: 0 ACC: 0 	jnz 47  ('jnz loop3'@98)
+  DEBUG   machine:simulation    TICK: 619 PC: 56 ADDR: 32 MEM_OUT: 0 ACC: 0 	load 29  ('load text3'@101)
+  DEBUG   machine:simulation    TICK: 621 PC: 57 ADDR: 29 MEM_OUT: 1 ACC: 1 	store 32  ('store counter'@102)
+  DEBUG   machine:simulation    TICK: 623 PC: 58 ADDR: 32 MEM_OUT: 1 ACC: 1 	mov 29  ('mov text3'@103)
+  DEBUG   machine:simulation    TICK: 624 PC: 59 ADDR: 32 MEM_OUT: 1 ACC: 29 	store 33  ('store last_addr'@104)
+  DEBUG   machine:simulation    TICK: 626 PC: 60 ADDR: 33 MEM_OUT: 29 ACC: 29 	load 33  ('load last_addr'@106)
+  DEBUG   machine:simulation    TICK: 628 PC: 61 ADDR: 33 MEM_OUT: 29 ACC: 29 	inc  ('inc'@107)
+  DEBUG   machine:simulation    TICK: 629 PC: 62 ADDR: 33 MEM_OUT: 29 ACC: 30 	store 33  ('store last_addr'@108)
+  DEBUG   machine:simulation    TICK: 631 PC: 63 ADDR: 33 MEM_OUT: 30 ACC: 30 	ld 33  ('ld last_addr'@110)
+  DEBUG   machine:simulation    TICK: 634 PC: 64 ADDR: 30 MEM_OUT: 33 ACC: 33 	store 1  ('store output'@111)
+  DEBUG   machine:signal_wr     output: 'What is your name?\nHello, Alice!' << '!'
+  DEBUG   machine:simulation    TICK: 636 PC: 65 ADDR: 1 MEM_OUT: 0 ACC: 33 	load 32  ('load counter'@113)
+  DEBUG   machine:simulation    TICK: 638 PC: 66 ADDR: 32 MEM_OUT: 1 ACC: 1 	dec  ('dec'@114)
+  DEBUG   machine:simulation    TICK: 639 PC: 67 ADDR: 32 MEM_OUT: 1 ACC: 0 	store 32  ('store counter'@115)
+  DEBUG   machine:simulation    TICK: 641 PC: 68 ADDR: 32 MEM_OUT: 0 ACC: 0 	jnz 60  ('jnz loop4'@116)
+  DEBUG   machine:simulation    TICK: 642 PC: 69 ADDR: 32 MEM_OUT: 0 ACC: 0 	halt  ('halt'@118)
+  INFO    machine:simulation    output_buffer: 'What is your name?\nHello, Alice!'
+out_stdout: |
+  source LoC: 118 code instr: 107
+  ============================================================
+  What is your name?
+  Hello, Alice!
+  instr_counter:  363 ticks: 642
+out_code: |-
+  [".data",
+   0,
+   0,
+   18,
+   87,
+   104,
+   97,
+   116,
+   32,
+   105,
+   115,
+   32,
+   121,
+   111,
+   117,
+   114,
+   32,
+   110,
+   97,
+   109,
+   101,
+   63,
+   7,
+   72,
+   101,
+   108,
+   108,
+   111,
+   44,
+   32,
+   1,
+   33,
+   10,
+   0,
+   0,
+   0,
+   ".text",
+   {"index": 0, "opcode": "load", "arg": 2, "term": [24, "load text1"]},
+   {"index": 1, "opcode": "store", "arg": 32, "term": [25, "store counter"]},
+   {"index": 2, "opcode": "mov", "arg": 2, "term": [26, "mov text1"]},
+   {"index": 3, "opcode": "store", "arg": 33, "term": [27, "store last_addr"]},
+   {"index": 4, "opcode": "load", "arg": 33, "term": [29, "load last_addr"]},
+   {"index": 5, "opcode": "inc", "term": [30, "inc"]},
+   {"index": 6, "opcode": "store", "arg": 33, "term": [31, "store last_addr"]},
+   {"index": 7, "opcode": "ld", "arg": 33, "term": [33, "ld last_addr"]},
+   {"index": 8, "opcode": "store", "arg": 1, "term": [34, "store output"]},
+   {"index": 9, "opcode": "load", "arg": 32, "term": [36, "load counter"]},
+   {"index": 10, "opcode": "dec", "term": [37, "dec"]},
+   {"index": 11, "opcode": "store", "arg": 32, "term": [38, "store counter"]},
+   {"index": 12, "opcode": "jnz", "arg": 4, "term": [39, "jnz loop"]},
+   {"index": 13, "opcode": "load", "arg": 31, "term": [41, "load new_line_code"]},
+   {"index": 14, "opcode": "store", "arg": 1, "term": [42, "store output"]},
+   {"index": 15, "opcode": "mov", "arg": 34, "term": [44, "mov buffer"]},
+   {"index": 16, "opcode": "inc", "term": [45, "inc"]},
+   {"index": 17, "opcode": "store", "arg": 33, "term": [46, "store last_addr"]},
+   {"index": 18, "opcode": "load", "arg": 0, "term": [49, "load input"]},
+   {"index": 19, "opcode": "sub", "arg": 31, "term": [50, "sub new_line_code"]},
+   {"index": 20, "opcode": "jz", "arg": 30, "term": [51, "jz input_break"]},
+   {"index": 21, "opcode": "add", "arg": 31, "term": [52, "add new_line_code"]},
+   {"index": 22, "opcode": "st", "arg": 33, "term": [53, "st last_addr"]},
+   {"index": 23, "opcode": "load", "arg": 33, "term": [55, "load last_addr"]},
+   {"index": 24, "opcode": "inc", "term": [56, "inc"]},
+   {"index": 25, "opcode": "store", "arg": 33, "term": [57, "store last_addr"]},
+   {"index": 26, "opcode": "load", "arg": 34, "term": [59, "load buffer"]},
+   {"index": 27, "opcode": "inc", "term": [60, "inc"]},
+   {"index": 28, "opcode": "store", "arg": 34, "term": [61, "store buffer"]},
+   {"index": 29, "opcode": "jmp", "arg": 18, "term": [63, "jmp input_loop"]},
+   {"index": 30, "opcode": "load", "arg": 21, "term": [66, "load text2"]},
+   {"index": 31, "opcode": "store", "arg": 32, "term": [67, "store counter"]},
+   {"index": 32, "opcode": "mov", "arg": 21, "term": [68, "mov text2"]},
+   {"index": 33, "opcode": "store", "arg": 33, "term": [69, "store last_addr"]},
+   {"index": 34, "opcode": "load", "arg": 33, "term": [71, "load last_addr"]},
+   {"index": 35, "opcode": "inc", "term": [72, "inc"]},
+   {"index": 36, "opcode": "store", "arg": 33, "term": [73, "store last_addr"]},
+   {"index": 37, "opcode": "ld", "arg": 33, "term": [75, "ld last_addr"]},
+   {"index": 38, "opcode": "store", "arg": 1, "term": [76, "store output"]},
+   {"index": 39, "opcode": "load", "arg": 32, "term": [78, "load counter"]},
+   {"index": 40, "opcode": "dec", "term": [79, "dec"]},
+   {"index": 41, "opcode": "store", "arg": 32, "term": [80, "store counter"]},
+   {"index": 42, "opcode": "jnz", "arg": 34, "term": [81, "jnz loop2"]},
+   {"index": 43, "opcode": "load", "arg": 34, "term": [83, "load buffer"]},
+   {"index": 44, "opcode": "store", "arg": 32, "term": [84, "store counter"]},
+   {"index": 45, "opcode": "mov", "arg": 34, "term": [85, "mov buffer"]},
+   {"index": 46, "opcode": "store", "arg": 33, "term": [86, "store last_addr"]},
+   {"index": 47, "opcode": "load", "arg": 33, "term": [88, "load last_addr"]},
+   {"index": 48, "opcode": "inc", "term": [89, "inc"]},
+   {"index": 49, "opcode": "store", "arg": 33, "term": [90, "store last_addr"]},
+   {"index": 50, "opcode": "ld", "arg": 33, "term": [92, "ld last_addr"]},
+   {"index": 51, "opcode": "store", "arg": 1, "term": [93, "store output"]},
+   {"index": 52, "opcode": "load", "arg": 32, "term": [95, "load counter"]},
+   {"index": 53, "opcode": "dec", "term": [96, "dec"]},
+   {"index": 54, "opcode": "store", "arg": 32, "term": [97, "store counter"]},
+   {"index": 55, "opcode": "jnz", "arg": 47, "term": [98, "jnz loop3"]},
+   {"index": 56, "opcode": "load", "arg": 29, "term": [101, "load text3"]},
+   {"index": 57, "opcode": "store", "arg": 32, "term": [102, "store counter"]},
+   {"index": 58, "opcode": "mov", "arg": 29, "term": [103, "mov text3"]},
+   {"index": 59, "opcode": "store", "arg": 33, "term": [104, "store last_addr"]},
+   {"index": 60, "opcode": "load", "arg": 33, "term": [106, "load last_addr"]},
+   {"index": 61, "opcode": "inc", "term": [107, "inc"]},
+   {"index": 62, "opcode": "store", "arg": 33, "term": [108, "store last_addr"]},
+   {"index": 63, "opcode": "ld", "arg": 33, "term": [110, "ld last_addr"]},
+   {"index": 64, "opcode": "store", "arg": 1, "term": [111, "store output"]},
+   {"index": 65, "opcode": "load", "arg": 32, "term": [113, "load counter"]},
+   {"index": 66, "opcode": "dec", "term": [114, "dec"]},
+   {"index": 67, "opcode": "store", "arg": 32, "term": [115, "store counter"]},
+   {"index": 68, "opcode": "jnz", "arg": 60, "term": [116, "jnz loop4"]},
+   {"index": 69, "opcode": "halt", "term": [118, "halt"]}]
