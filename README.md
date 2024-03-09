@@ -64,7 +64,7 @@ comment ::= ";" <any symbols except "\n">
 
 ``` asm
 label: 
-    increment
+    inc
 ```
 
 И в другом месте (неважно, до или после определения) сослаться на эту метку:
